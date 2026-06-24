@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>for ashley 💕</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--her-color:#FF4D8D;}
+html,body{height:100%;}
+html{overflow-anchor:none;}
+body{
+  font-family:'Quicksand',system-ui,sans-serif;
+  background:#1a0f1a;
+  color:#fff;
+  scroll-snap-type:y mandatory;
+  overflow-y:scroll;
+  overflow-anchor:none;
+  overscroll-behavior-y:contain;
+  -webkit-overflow-scrolling:touch;
+}
+.slide{overflow-anchor:none;}
+.slide{
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  min-height:100vh;
+  min-height:100dvh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  padding:4.5rem 1.4rem 3rem;
+  position:relative;
+  gap:1.1rem;
+}
+
+/* ── progress bar ── */
+.progress-bar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;gap:4px;padding:.8rem 1rem;
+  padding-top:max(.8rem, env(safe-area-inset-top));
+}
+.seg{flex:1;height:4px;border-radius:4px;background:rgba(255,255,255,.25);transition:background .3s;}
+.seg.filled{background:rgba(255,255,255,.55);}
+.seg.active{background:#fff;}
+
+.eyebrow{
+  font-family:'Fredoka',sans-serif;font-weight:600;font-size:.78rem;
+  letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.8);
+}
+.script{font-family:'Pacifico',cursive;font-weight:400;}
+.title{
+  font-family:'Fredoka',sans-serif;font-weight:700;
+  font-size:clamp(1.9rem,8vw,3rem);line-height:1.18;
+  color:#fff;text-shadow:0 4px 18px rgba(0,0,0,.2);
+  max-width:92%;
+}
+.body-text{
+  font-size:clamp(1rem,4vw,1.15rem);line-height:1.6;font-weight:600;
+  color:rgba(255,255,255,.96);max-width:480px;
+}
+.tag-pill{
+  display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.32);
+  border-radius:999px;padding:.45rem 1.1rem;font-size:.8rem;font-weight:700;
+  font-family:'Fredoka',sans-serif;
+}
+.big-emoji{font-size:clamp(3rem,16vw,4.6rem);line-height:1;animation:bob 2.4s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-10px) rotate(3deg);}}
+
+.next-arrow{
+  position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);
+  background:rgba(255,255,255,.16);border:none;color:#fff;
+  width:46px;height:46px;border-radius:50%;font-size:1.3rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  animation:nudge 1.8s ease-in-out infinite;
+}
+@keyframes nudge{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
+
+.game-btn{
+  font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.05rem;
+  padding:.95rem 2rem;border:none;border-radius:16px;
+  background:var(--her-color);color:#fff;cursor:pointer;text-decoration:none;display:inline-block;
+  box-shadow:0 6px 0 rgba(0,0,0,.18), 0 8px 20px rgba(0,0,0,.2);
+  transition:transform .15s;
+}
+.game-btn.light{background:#fff;color:#7A1850;}
+.game-btn:active{transform:translateY(3px);}
+.game-btn.small{padding:.7rem 1.2rem;font-size:1rem;border-radius:12px;}
+
+input[type=text]{
+  font-family:'Quicksand',sans-serif;font-size:1rem;font-weight:700;
+  padding:.85rem 1.1rem;border-radius:14px;border:none;
+  width:min(86vw,320px);outline:none;color:#3a1030;
+}
+
+.swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;width:min(90vw,320px);}
+.swatch{
+  width:100%;aspect-ratio:1;border-radius:50%;border:3px solid rgba(255,255,255,.5);
+  cursor:pointer;transition:transform .2s,border-color .2s;
+  font-family:'Fredoka',sans-serif;font-weight:700;color:#fff;font-size:1.2rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.swatch.picked{border-color:#fff;transform:scale(1.12);}
+.swatch.other{background:rgba(255,255,255,.16);}
+
+.qa-resp{font-family:'Fredoka',sans-serif;font-weight:600;font-size:1rem;min-height:1.4em;color:#fff;}
+
+.summary-card{
+  background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.3);
+  border-radius:18px;padding:1.2rem 1.5rem;max-width:380px;width:100%;
+  display:flex;flex-direction:column;gap:.8rem;text-align:left;
+}
+.summary-row{display:flex;align-items:center;gap:.7rem;font-weight:700;font-family:'Fredoka',sans-serif;font-size:.95rem;}
+.summary-row .dot{width:22px;height:22px;border-radius:50%;flex-shrink:0;background:var(--her-color);}
+
+.stat-line{font-family:'Fredoka',sans-serif;font-weight:600;}
+
+.popup{
+  position:fixed;pointer-events:none;z-index:1100;
+  font-family:'Fredoka',sans-serif;font-weight:700;font-size:1.3rem;color:#fff;
+  text-shadow:0 2px 8px rgba(0,0,0,.3);animation:popup .8s ease forwards;
+}
+@keyframes popup{
+  0%{opacity:1;transform:translate(-50%,-50%) scale(.6);}
+  30%{transform:translate(-50%,-90%) scale(1.15);}
+  100%{opacity:0;transform:translate(-50%,-160%) scale(1);}
+}
+
+.spotify-embed{border-radius:16px;width:min(92vw,360px);border:none;}
+
+#confettiCanvas{position:fixed;inset:0;z-index:1000;pointer-events:none;display:none;}
+
+.cert-sign{font-family:'Pacifico',cursive;font-size:1.4rem;}
+
+/* ── per-slide gradients (one continuous flirty color journey) ── */
+#s-open{background:linear-gradient(160deg,#FF9AC1,#FF6FA5);}
+#s-miss{background:linear-gradient(160deg,#FF5C8A,#C56FFF);}
+#s-hardworking{background:linear-gradient(160deg,#FF7A45,#FF4D8D);}
+#s-curls{background:linear-gradient(160deg,#C56FFF,#6F8CFF);}
+#s-kind{background:linear-gradient(160deg,#FFB84D,#FF6F91);}
+#s-cubana{background:linear-gradient(160deg,#4FA8E0,#FF4D4D);}
+#s-q-color{background:linear-gradient(160deg,#6F8CFF,#C56FFF);}
+#s-q-song{background:linear-gradient(160deg,#FF4D8D,#FF8FD8);}
+#s-q-food{background:linear-gradient(160deg,#FFB84D,#FF7A45);}
+#s-q-vacation{background:linear-gradient(160deg,#FF7A45,#FF6FB5);}
+#s-q-date{background:linear-gradient(160deg,#FF6FB5,#C56FFF);}
+#s-q-summary{background:linear-gradient(160deg,#C56FFF,#FF6FA5);}
+#s-game{background:linear-gradient(160deg,#FF2D6F,#FF7AB8);}
+#s-song{background:linear-gradient(160deg,#3D1E63,#9C4DCC);}
+#s-finale{
+  background:linear-gradient(135deg,#FF6FA5,#FFD93D,#C56FFF,#FF8C42);
+  background-size:300% 300%;
+  animation:hueShift 14s ease-in-out infinite;
+}
+@keyframes hueShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important;transition:none !important;}
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<section class="slide" id="s-open">
+  <span class="tag-pill">for ashley, obviously xoxo </span>
+  <h1 class="title script" style="font-size:clamp(2.6rem,14vw,4.2rem);">hi you.</h1>
+  <p class="body-text">i missed you, so i made you this.<br>swipe up whenever you're ready.</p>
+  <button class="next-arrow" aria-label="next">⌄</button>
+</section>
+
+<section class="slide" id="s-miss">
+  <span class="eyebrow">morr</span>
+  <h1 class="title">i miss you.<br>like, a lot.</h1>
+  <p class="body-text">not the casual kind. the kind where i catch myself smiling at nothing because i thought of something you said. that kind. so here's a whole little world, just for you.</p>
+  <span class="tag-pill">📍 currently: thinking about you</span>
+  <button class="next-arrow" aria-label="next">⌄</button>
+</section>
+
+<section class="slide" id="s-hardworking">
+  <div class="big-emoji">💪</div>
+  <h1 class="title">can we talk about how hard you work?</h1>
+  <p class="body-text">I love that you put hardwork towards your vision of life. it's honestly one of the hottest things about you. not gonna pretend otherwise.</p>
+  <button class="next-arrow" aria-label="next">⌄</button>
+</section>
+
+<section class="slide" id="s-curls">
+  <div class="big-emoji">➰</div>
+  <h1 class="title">and that hair...</h1>
+  <p class="body-text">those curls have no business being that perfect. i notice. i always notice.</p>
+  <button class="next-arrow" aria-label="next">⌄</button>
+</section>
+
+<section class="slide" id="s-kind">
+  <div class="big-emoji">💛</div>
+  <h1 class="title">you're just... kind.</h1>
+  <p class="body-text">to everyone. even people who don't deserve it. kind of unfair to the rest of us, honestly.</p>
+  <button class="next-arrow" aria-label="next">⌄</button>
+</section>
+
+<section class="slide" id="s-cubana">
+  <div class="big-emoji">💃</div>
+  <h1 class="title">and that cuban side uuu dont even get me started.</h1>
+  <p class="body-text">i love that we share that in common, more than you probably know. and i love the way you speak — that accent gets me, every single time.</p>
+  <button class="next-arrow" aria-label="next">⌄</button>
+</section>
+
+<section class="slide" id="s-q-color">
+  <span class="eyebrow">okay, your turn</span>
+  <h1 class="title">favorite color right now?</h1>
+  <div class="swatches">
+    <button class="swatch" style="background:#FF4D8D" data-name="hot pink" data-hex="#FF4D8D"></button>
+    <button class="swatch" style="background:#FF4D4D" data-name="red" data-hex="#FF4D4D"></button>
+    <button class="swatch" style="background:#FF8C42" data-name="orange" data-hex="#FF8C42"></button>
+    <button class="swatch" style="background:#FFD93D" data-name="yellow" data-hex="#FFD93D"></button>
+    <button class="swatch" style="background:#4DD68C" data-name="green" data-hex="#4DD68C"></button>
+    <button class="swatch" style="background:#4D8DFF" data-name="blue" data-hex="#4D8DFF"></button>
+    <button class="swatch" style="background:#A64DFF" data-name="purple" data-hex="#A64DFF"></button>
+    <button class="swatch" style="background:#2B2B2B" data-name="black" data-hex="#2B2B2B"></button>
+    <button class="swatch other" data-name="other" type="button">?</button>
+  </div>
+  <div id="colorOtherWrap" style="display:none;gap:.6rem;align-items:center;">
+    <input type="text" id="colorOtherInput" placeholder="tell me" maxlength="30">
+    <button class="game-btn small light" id="colorOtherSubmit" type="button">💜</button>
+  </div>
+  <p class="qa-resp" id="colorResp"></p>
+  <button class="next-arrow" aria-label="next">⌄</button>
+</section>
+
+<section class="slide" id="s-q-song">
+  <span class="eyebrow">next up</span>
+  <h1 class="title">what song's been stuck in your head lately?</h1>
+  <input type="text" id="songInput" placeholder="type it here..." maxlength="60">
+  <button class="game-btn light" id="songSubmit" type="button">💌 send</button>
+  <p class="qa-resp" id="songResp"></p>
+  <button class="next-arrow" aria-label="next">⌄</button>
+</section>
+
+<section class="slide" id="s-q-food">
+  <span class="eyebrow">keep going</span>
+  <h1 class="title">what food have you been craving lately?</h1>
+  <input type="text" id="foodInput" placeholder="type it here..." maxlength="60">
+  <button class="game-btn light" id="foodSubmit" type="button">💌 send</button>
+  <p class="qa-resp" id="foodResp"></p>
+  <button class="next-arrow" aria-label="next">⌄</button>
+</section>
+
+<section class="slide" id="s-q-vacation">
+  <span class="eyebrow">almost there</span>
+  <h1 class="title">if we could disappear anywhere right now — where are we going?</h1>
+  <input type="text" id="vacationInput" placeholder="name the place..." maxlength="60">
+  <button class="game-btn light" id="vacationSubmit" type="button">💌 send</button>
+  <p class="qa-resp" id="vacationResp"></p>
+  <button class="next-arrow" aria-label="next">⌄</button>
+</section>
+
+<section class="slide" id="s-q-date">
+  <span class="eyebrow">last one</span>
+  <h1 class="title">what's your idea of a perfect date?</h1>
+  <input type="text" id="dateInput" placeholder="paint me the picture..." maxlength="80">
+  <button class="game-btn light" id="dateSubmit" type="button">💌 send</button>
+  <p class="qa-resp" id="dateResp"></p>
+  <button class="next-arrow" aria-label="next">⌄</button>
+</section>
+
+<section class="slide" id="s-q-summary">
+  <h1 class="title">okay, noted:</h1>
+  <div class="summary-card">
+    <div class="summary-row"><span class="dot" id="sumColorDot"></span><span id="sumColorText">favorite color: —</span></div>
+    <div class="summary-row">🎵 <span id="sumSongText">song: —</span></div>
+    <div class="summary-row">🍽️ <span id="sumFoodText">food: —</span></div>
+    <div class="summary-row">🌴 <span id="sumVacationText">dream trip: —</span></div>
+    <div class="summary-row">💭 <span id="sumDateText">perfect date: —</span></div>
+  </div>
+  <p class="body-text">saving all of this for later. 😏</p>
+  <button class="next-arrow" aria-label="next">⌄</button>
+</section>
+
+<section class="slide" id="s-game">
+  <h1 class="title">catch these.</h1>
+  <p class="body-text">consider it a down payment on the real ones. 10 seconds, go.</p>
+  <p class="stat-line" id="kissScore">caught: 0</p>
+  <div id="kissArea" style="position:relative;width:min(94vw,520px);height:280px;overflow:hidden;"></div>
+  <div id="gameResultArea" style="display:none;">
+    <p class="stat-line" id="gameResultText"></p>
+  </div>
+  <button class="next-arrow" aria-label="next">⌄</button>
+</section>
+
+<section class="slide" id="s-song">
+  <span class="eyebrow">on repeat</span>
+  <h1 class="title">this is the song that's been reminding me of you</h1>
+  <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/2RdEC8Ff83WkX7kDVCHseE?utm_source=generator&theme=0" height="152" frameborder="0" allowfullscreen loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+  <p class="body-text" style="font-size:.95rem;"> play it. think of me. i'll allow it.</p>
+  <button class="next-arrow" aria-label="next">⌄</button>
+</section>
+
+<section class="slide" id="s-finale">
+  <div class="big-emoji">💌</div>
+  <h1 class="title">i meant all of it.</h1>
+  <p class="body-text" id="finaleBody">hardworking, kind, beautiful thats youuu and i miss you. so come back to me soon.</p>
+  <p class="cert-sign">— jordan 💕</p>
+  <button class="game-btn light" id="shareBtn" type="button">send me your answers 💌</button>
+  <p class="qa-resp" id="shareResp"></p>
+  <button class="game-btn light" id="replayBtn" type="button">back to the top ↑</button>
+  <p style="font-family:'Courier New',monospace;font-size:.7rem;color:rgba(255,255,255,.6);">made for you.</p>
+</section>
+
+<script>
+/* ── progress bar + slide tracking ── */
+const slides = Array.from(document.querySelectorAll('.slide'));
+const bar = document.getElementById('progressBar');
+slides.forEach(() => { const seg = document.createElement('span'); seg.className = 'seg'; bar.appendChild(seg); });
+const segs = Array.from(bar.children);
+
+const slideObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const idx = slides.indexOf(entry.target);
+      segs.forEach((seg, i) => {
+        seg.classList.toggle('active', i === idx);
+        if (i <= idx) seg.classList.add('filled');
+      });
+      if (entry.target.id === 's-finale') fireFinale();
+    }
+  });
+}, { threshold: .55 });
+slides.forEach((s) => slideObserver.observe(s));
+
+/* ── generic "next" arrow ── */
+document.querySelectorAll('.next-arrow').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const next = btn.closest('.slide').nextElementSibling;
+    if (next) next.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+function goNextFrom(el, delay){
+  const next = el.closest('.slide').nextElementSibling;
+  if (next) setTimeout(() => next.scrollIntoView({ behavior: 'smooth' }), delay != null ? delay : 900);
+}
+
+/* ── tiny synthesized sfx, no audio files ── */
+let _ac = null;
+function ac(){ if(!_ac) _ac = new (window.AudioContext || window.webkitAudioContext)(); return _ac; }
+function tone(freq, t0, dur, vol, type){
+  const c = ac();
+  const o = c.createOscillator(), g = c.createGain();
+  const f = c.createBiquadFilter();
+  f.type = 'lowpass'; f.frequency.value = 2400;
+  o.type = type || 'sine'; o.frequency.value = freq;
+  g.gain.setValueAtTime(0, t0);
+  g.gain.linearRampToValueAtTime(vol, t0 + .015);
+  g.gain.exponentialRampToValueAtTime(.0008, t0 + dur);
+  o.connect(f); f.connect(g); g.connect(c.destination);
+  o.start(t0); o.stop(t0 + dur + .05);
+}
+function sfxPop(){
+  try{
+    const c = ac(), t = c.currentTime;
+    tone(880, t, .45, .12, 'sine');
+    tone(1318.5, t + .02, .5, .09, 'sine');
+  }catch(e){}
+}
+function sfxFanfare(){
+  try{
+    const c = ac(), t = c.currentTime;
+    tone(261.63, t, 1.1, .05, 'sine');
+    [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => tone(f, t + i * .09, .5, .13, 'sine'));
+  }catch(e){}
+}
+
+/* ── floating "+1" popup ── */
+function popup(x, y, text){
+  const el = document.createElement('div');
+  el.className = 'popup'; el.style.left = x + 'px'; el.style.top = y + 'px'; el.textContent = text;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 820);
+}
+
+/* ── vanilla canvas confetti ── */
+(function(){
+  let canvas, ctx, particles = [], raf = null;
+  const colors = ['#FF4D8D', '#FF8C42', '#FFD93D', '#A64DFF', '#FF6FA5', '#FFFFFF'];
+  function ensureCanvas(){
+    canvas = document.getElementById('confettiCanvas');
+    if(!canvas){ canvas = document.createElement('canvas'); canvas.id = 'confettiCanvas'; document.body.appendChild(canvas); }
+    ctx = canvas.getContext('2d'); canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', () => { if(canvas){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; } });
+  function spawn(x, y, big){
+    const ang = Math.random() * Math.PI * 2;
+    const speed = big ? Math.random() * 8 + 4 : Math.random() * 4 + 1.5;
+    return {
+      x, y, vx: Math.cos(ang) * speed * (big ? 1 : .6), vy: Math.sin(ang) * speed - (big ? Math.random() * 5 : Math.random() * 2),
+      size: Math.random() * 7 + 4, color: colors[Math.floor(Math.random() * colors.length)],
+      rot: Math.random() * Math.PI, vrot: (Math.random() - .5) * .35,
+      life: 0, maxLife: big ? 120 + Math.random() * 50 : 40 + Math.random() * 20
+    };
+  }
+  function loop(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach((p) => {
+      p.vy += .15; p.x += p.vx; p.y += p.vy; p.rot += p.vrot; p.life++;
+      ctx.save(); ctx.globalAlpha = Math.max(0, 1 - p.life / p.maxLife);
+      ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.fillStyle = p.color;
+      ctx.fillRect(-p.size / 2, -p.size / 3, p.size, p.size * .6); ctx.restore();
+    });
+    particles = particles.filter((p) => p.life < p.maxLife && p.y < canvas.height + 50);
+    if(particles.length){ raf = requestAnimationFrame(loop); } else { canvas.style.display = 'none'; raf = null; }
+  }
+  function run(){ canvas.style.display = 'block'; if(!raf) raf = requestAnimationFrame(loop); }
+  window.confettiBurst = function(x, y, count){
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if(!canvas) ensureCanvas();
+    for(let i = 0; i < (count || 16); i++) particles.push(spawn(x, y, false));
+    run();
+  };
+  window.confettiFinale = function(){
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if(!canvas) ensureCanvas();
+    const w = canvas.width;
+    for(let i = 0; i < 180; i++) particles.push(spawn(w * Math.random(), canvas.height * .25 + Math.random() * 60, true));
+    run();
+  };
+  ensureCanvas();
+})();
+
+/* ── her answers ── */
+const answers = { color: null, colorHex: null, song: null, food: null, vacation: null, date: null };
+
+/* color question */
+document.querySelectorAll('.swatch:not(.other)').forEach((sw) => {
+  sw.addEventListener('click', () => {
+    document.querySelectorAll('.swatch').forEach((s) => s.classList.remove('picked'));
+    sw.classList.add('picked');
+    const name = sw.dataset.name, hex = sw.dataset.hex;
+    answers.color = name; answers.colorHex = hex;
+    document.documentElement.style.setProperty('--her-color', hex);
+    document.getElementById('colorResp').textContent = 'noted — ' + name + ' 💜';
+    sfxPop();
+    const r = sw.getBoundingClientRect();
+    confettiBurst(r.left + r.width / 2, r.top + r.height / 2, 16);
+    goNextFrom(sw);
+  });
+});
+const otherSwatch = document.querySelector('.swatch.other');
+otherSwatch.addEventListener('click', () => {
+  const wrap = document.getElementById('colorOtherWrap');
+  wrap.style.display = 'flex';
+  document.getElementById('colorOtherInput').focus();
+});
+function submitOtherColor(){
+  const val = document.getElementById('colorOtherInput').value.trim();
+  if(!val) return;
+  answers.color = val; answers.colorHex = '#C56FFF';
+  document.documentElement.style.setProperty('--her-color', '#C56FFF');
+  document.getElementById('colorResp').textContent = 'noted — ' + val + ' 💜';
+  sfxPop();
+  goNextFrom(otherSwatch);
+}
+document.getElementById('colorOtherSubmit').addEventListener('click', submitOtherColor);
+document.getElementById('colorOtherInput').addEventListener('keydown', (e) => { if(e.key === 'Enter') submitOtherColor(); });
+
+/* song question */
+function submitSong(){
+  const val = document.getElementById('songInput').value.trim();
+  if(!val) return;
+  answers.song = val;
+  document.getElementById('songResp').textContent = 'adding "' + val + '" to the playlist i\'m definitely making 🎧';
+  sfxPop();
+  goNextFrom(document.getElementById('songSubmit'));
+}
+document.getElementById('songSubmit').addEventListener('click', submitSong);
+document.getElementById('songInput').addEventListener('keydown', (e) => { if(e.key === 'Enter') submitSong(); });
+
+/* food question */
+function submitFood(){
+  const val = document.getElementById('foodInput').value.trim();
+  if(!val) return;
+  answers.food = val;
+  document.getElementById('foodResp').textContent = 'noted. i\'m taking you there. 🍽️';
+  sfxPop();
+  goNextFrom(document.getElementById('foodSubmit'));
+}
+document.getElementById('foodSubmit').addEventListener('click', submitFood);
+document.getElementById('foodInput').addEventListener('keydown', (e) => { if(e.key === 'Enter') submitFood(); });
+
+/* vacation question */
+function submitVacation(){
+  const val = document.getElementById('vacationInput').value.trim();
+  if(!val) return;
+  answers.vacation = val;
+  document.getElementById('vacationResp').textContent = 'noted. i\'m already looking up flights. 🌴';
+  sfxPop();
+  goNextFrom(document.getElementById('vacationSubmit'));
+}
+document.getElementById('vacationSubmit').addEventListener('click', submitVacation);
+document.getElementById('vacationInput').addEventListener('keydown', (e) => { if(e.key === 'Enter') submitVacation(); });
+
+/* perfect date question */
+function submitDate(){
+  const val = document.getElementById('dateInput').value.trim();
+  if(!val) return;
+  answers.date = val;
+  document.getElementById('dateResp').textContent = 'noted — pressure\'s on for me now. 😏';
+  sfxPop();
+  goNextFrom(document.getElementById('dateSubmit'));
+}
+document.getElementById('dateSubmit').addEventListener('click', submitDate);
+document.getElementById('dateInput').addEventListener('keydown', (e) => { if(e.key === 'Enter') submitDate(); });
+
+/* summary slide */
+function renderSummary(){
+  document.getElementById('sumColorDot').style.background = answers.colorHex || 'var(--her-color)';
+  document.getElementById('sumColorText').textContent = 'favorite color: ' + (answers.color || 'a mystery, apparently');
+  document.getElementById('sumSongText').textContent = 'song: ' + (answers.song || 'still a mystery');
+  document.getElementById('sumFoodText').textContent = 'food: ' + (answers.food || 'still a mystery');
+  document.getElementById('sumVacationText').textContent = 'dream trip: ' + (answers.vacation || 'still a mystery');
+  document.getElementById('sumDateText').textContent = 'perfect date: ' + (answers.date || 'still a mystery');
+}
+new IntersectionObserver((entries) => {
+  entries.forEach((entry) => { if(entry.isIntersecting) renderSummary(); });
+}, { threshold: .3 }).observe(document.getElementById('s-q-summary'));
+
+/* ── catch-the-kisses mini game ── */
+let gameStarted = false;
+function startKissGame(){
+  if(gameStarted) return;
+  gameStarted = true;
+  const area = document.getElementById('kissArea');
+  let score = 0, running = true;
+  const EMOJIS = ['💋', '😘', '💕'];
+  function spawnKiss(){
+    if(!running) return;
+    const el = document.createElement('div');
+    el.textContent = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
+    el.style.position = 'absolute';
+    el.style.left = (Math.random() * 80) + '%';
+    el.style.top = '-12%';
+    el.style.fontSize = (1.8 + Math.random() * 1.3) + 'rem';
+    el.style.cursor = 'pointer';
+    el.style.userSelect = 'none';
+    el.style.transition = 'top 3s linear, left 3s ease-in-out, opacity .2s, transform .2s';
+    area.appendChild(el);
+    requestAnimationFrame(() => { el.style.top = '108%'; el.style.left = (Math.random() * 80) + '%'; });
+    el.addEventListener('click', () => {
+      if(!running) return;
+      score++;
+      document.getElementById('kissScore').textContent = 'caught: ' + score;
+      sfxPop();
+      const r = el.getBoundingClientRect();
+      popup(r.left, r.top, '+1');
+      el.style.transform = 'scale(1.6)'; el.style.opacity = '0';
+      setTimeout(() => el.remove(), 200);
+    });
+    setTimeout(() => { if(el.parentNode) el.remove(); }, 3100);
+  }
+  const spawnTimer = setInterval(spawnKiss, 420);
+  setTimeout(() => {
+    running = false;
+    clearInterval(spawnTimer);
+    Array.from(area.children).forEach((d) => d.remove());
+    let msg;
+    if(score < 6) msg = 'caught ' + score + '. that\'s okay — i\'ll bring the rest in person.';
+    else if(score < 14) msg = 'caught ' + score + '! not bad. you\'ll get the rest later, i promise.';
+    else msg = 'caught ' + score + '?! okay greedy. i like it.';
+    document.getElementById('gameResultText').textContent = msg;
+    document.getElementById('gameResultArea').style.display = 'block';
+    sfxFanfare();
+    const rect = area.getBoundingClientRect();
+    confettiBurst(rect.left + area.clientWidth / 2, rect.top + area.clientHeight / 2, 26);
+  }, 10000);
+}
+new IntersectionObserver((entries) => {
+  entries.forEach((entry) => { if(entry.isIntersecting) startKissGame(); });
+}, { threshold: .5 }).observe(document.getElementById('s-game'));
+
+/* ── finale ── */
+let finaleFired = false;
+function fireFinale(){
+  if(finaleFired) return;
+  finaleFired = true;
+  const bits = ['hardworking, kind, beautiful, — that\'s you.'];
+  if(answers.color) bits.push('and apparently a little bit of ' + answers.color + ', in my favorite way.');
+  if(answers.food) bits.push('probably still thinking about ' + answers.food + '.');
+  if(answers.vacation) bits.push('and apparently we\'re going to ' + answers.vacation + ' at some point — i\'m holding you to that.');
+  bits.push('and i miss you. so come back soon.');
+  document.getElementById('finaleBody').textContent = bits.join(' ');
+  confettiFinale();
+  setTimeout(confettiFinale, 500);
+  sfxFanfare();
+}
+
+document.getElementById('replayBtn').addEventListener('click', () => {
+  document.getElementById('s-open').scrollIntoView({ behavior: 'smooth' });
+});
+
+/* ── share her answers back to me ── */
+async function shareAnswers(){
+  const lines = [
+    'ok here\'s what i said 👀',
+    answers.color ? ('favorite color: ' + answers.color) : null,
+    answers.song ? ('current song: ' + answers.song) : null,
+    answers.food ? ('current craving: ' + answers.food) : null,
+    answers.vacation ? ('dream trip: ' + answers.vacation) : null,
+    answers.date ? ('perfect date: ' + answers.date) : null
+  ].filter(Boolean).join('\n');
+
+  sfxPop();
+  if(navigator.share){
+    try{ await navigator.share({ text: lines }); }catch(e){ /* she cancelled, leave it alone */ }
+    return;
+  }
+  try{
+    await navigator.clipboard.writeText(lines);
+    document.getElementById('shareResp').textContent = 'copied! paste it back to me 💌';
+  }catch(e){
+    document.getElementById('shareResp').textContent = lines;
+  }
+}
+document.getElementById('shareBtn').addEventListener('click', shareAnswers);
+</script>
+</body>
+</html>
